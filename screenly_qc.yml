@@ -2,7 +2,7 @@
 syntax: manifest_v1
 id: 01JZHRAN99KQN84VTZ55EJP3SP
 description: Displays the screen metadata like position on Google map, coordinates, hostname, etc.
-icon: https://playground.srly.io/edge-apps/asset-metadata/static/images/icon.svg
+icon: https://playground.srly.io/edge-apps/icons/asset-metadata.svg
 author: Screenly, Inc.
 categories:
   - Utilities
