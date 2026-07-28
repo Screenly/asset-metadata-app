@@ -6,18 +6,27 @@
     <title>Asset Metadata</title>
     <script src="screenly.js?version=1"></script>
   </head>
-  <body>
+  <body
+    class="bg-[url('/static/images/bg.webp')] bg-no-repeat bg-center bg-cover before:content-[''] before:fixed before:inset-0 before:z-[var(--z-index-backdrop)] before:pointer-events-none before:bg-black/[0.15]"
+  >
     <auto-scaler
       reference-width="1920"
       reference-height="1080"
       orientation="auto"
+      class="relative z-[var(--z-index-content)]"
     >
-      <div id="app">
-        <div class="widgets">
-          <div class="card">
-            <div class="card-header">
+      <div id="app" class="w-full h-full flex flex-col">
+        <div
+          class="widgets flex-1 flex flex-col items-end justify-start p-[calc(1.5*var(--su))] gap-[calc(0.75*var(--su))] overflow-hidden portrait:items-stretch portrait:gap-[calc(2.5*var(--su))]"
+        >
+          <div
+            class="card w-[calc(25*var(--su))] bg-[linear-gradient(106deg,rgba(255,255,255,0.12)_3%,rgba(255,255,255,0.04)_100%)] border border-[rgba(255,255,255,0.15)] rounded-[calc(1*var(--su))] p-[calc(1*var(--su))] backdrop-blur-[32px] shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset,0_-1px_0_0_rgba(255,255,255,0.05)_inset,0_calc(0.2*var(--su))_calc(1.5*var(--su))_rgba(0,0,0,0.25)] flex flex-col gap-[calc(0.7*var(--su))] portrait:w-full portrait:p-[calc(4*var(--su))] portrait:rounded-[calc(2.5*var(--su))] portrait:gap-[calc(1.5*var(--su))]"
+          >
+            <div
+              class="card-header flex items-center gap-[calc(0.5*var(--su))] shrink-0 portrait:gap-[calc(1.5*var(--su))]"
+            >
               <svg
-                class="card-icon"
+                class="card-icon w-[calc(2*var(--su))] h-[calc(2*var(--su))] shrink-0 portrait:w-[calc(6*var(--su))] portrait:h-[calc(6*var(--su))]"
                 viewBox="0 0 58 58"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -33,15 +42,27 @@
                   fill="white"
                 />
               </svg>
-              <span class="card-label">Host Name</span>
+              <span
+                class="card-label text-[calc(0.65*var(--su))] font-bold tracking-[0.08em] uppercase text-white/80 leading-none portrait:text-[calc(2*var(--su))]"
+                >Host Name</span
+              >
             </div>
-            <div class="card-value" id="hostname">N/A</div>
+            <div
+              class="card-value text-[calc(1.2*var(--su))] font-semibold text-white leading-[1.15] overflow-hidden text-ellipsis line-clamp-2 tracking-[-0.02em] portrait:text-[calc(3.5*var(--su))]"
+              id="hostname"
+            >
+              N/A
+            </div>
           </div>
 
-          <div class="card">
-            <div class="card-header">
+          <div
+            class="card w-[calc(25*var(--su))] bg-[linear-gradient(106deg,rgba(255,255,255,0.12)_3%,rgba(255,255,255,0.04)_100%)] border border-[rgba(255,255,255,0.15)] rounded-[calc(1*var(--su))] p-[calc(1*var(--su))] backdrop-blur-[32px] shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset,0_-1px_0_0_rgba(255,255,255,0.05)_inset,0_calc(0.2*var(--su))_calc(1.5*var(--su))_rgba(0,0,0,0.25)] flex flex-col gap-[calc(0.7*var(--su))] portrait:w-full portrait:p-[calc(4*var(--su))] portrait:rounded-[calc(2.5*var(--su))] portrait:gap-[calc(1.5*var(--su))]"
+          >
+            <div
+              class="card-header flex items-center gap-[calc(0.5*var(--su))] shrink-0 portrait:gap-[calc(1.5*var(--su))]"
+            >
               <svg
-                class="card-icon"
+                class="card-icon w-[calc(2*var(--su))] h-[calc(2*var(--su))] shrink-0 portrait:w-[calc(6*var(--su))] portrait:h-[calc(6*var(--su))]"
                 viewBox="0 0 58 58"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -57,15 +78,27 @@
                   fill="white"
                 />
               </svg>
-              <span class="card-label">Screen Name</span>
+              <span
+                class="card-label text-[calc(0.65*var(--su))] font-bold tracking-[0.08em] uppercase text-white/80 leading-none portrait:text-[calc(2*var(--su))]"
+                >Screen Name</span
+              >
             </div>
-            <div class="card-value" id="screen-name">N/A</div>
+            <div
+              class="card-value text-[calc(1.2*var(--su))] font-semibold text-white leading-[1.15] overflow-hidden text-ellipsis line-clamp-2 tracking-[-0.02em] portrait:text-[calc(3.5*var(--su))]"
+              id="screen-name"
+            >
+              N/A
+            </div>
           </div>
 
-          <div class="card">
-            <div class="card-header">
+          <div
+            class="card w-[calc(25*var(--su))] bg-[linear-gradient(106deg,rgba(255,255,255,0.12)_3%,rgba(255,255,255,0.04)_100%)] border border-[rgba(255,255,255,0.15)] rounded-[calc(1*var(--su))] p-[calc(1*var(--su))] backdrop-blur-[32px] shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset,0_-1px_0_0_rgba(255,255,255,0.05)_inset,0_calc(0.2*var(--su))_calc(1.5*var(--su))_rgba(0,0,0,0.25)] flex flex-col gap-[calc(0.7*var(--su))] portrait:w-full portrait:p-[calc(4*var(--su))] portrait:rounded-[calc(2.5*var(--su))] portrait:gap-[calc(1.5*var(--su))]"
+          >
+            <div
+              class="card-header flex items-center gap-[calc(0.5*var(--su))] shrink-0 portrait:gap-[calc(1.5*var(--su))]"
+            >
               <svg
-                class="card-icon"
+                class="card-icon w-[calc(2*var(--su))] h-[calc(2*var(--su))] shrink-0 portrait:w-[calc(6*var(--su))] portrait:h-[calc(6*var(--su))]"
                 viewBox="0 0 58 58"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,15 +118,27 @@
                   fill="white"
                 />
               </svg>
-              <span class="card-label">Hardware</span>
+              <span
+                class="card-label text-[calc(0.65*var(--su))] font-bold tracking-[0.08em] uppercase text-white/80 leading-none portrait:text-[calc(2*var(--su))]"
+                >Hardware</span
+              >
             </div>
-            <div class="card-value" id="hardware">N/A</div>
+            <div
+              class="card-value text-[calc(1.2*var(--su))] font-semibold text-white leading-[1.15] overflow-hidden text-ellipsis line-clamp-2 tracking-[-0.02em] portrait:text-[calc(3.5*var(--su))]"
+              id="hardware"
+            >
+              N/A
+            </div>
           </div>
 
-          <div class="card">
-            <div class="card-header">
+          <div
+            class="card w-[calc(25*var(--su))] bg-[linear-gradient(106deg,rgba(255,255,255,0.12)_3%,rgba(255,255,255,0.04)_100%)] border border-[rgba(255,255,255,0.15)] rounded-[calc(1*var(--su))] p-[calc(1*var(--su))] backdrop-blur-[32px] shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset,0_-1px_0_0_rgba(255,255,255,0.05)_inset,0_calc(0.2*var(--su))_calc(1.5*var(--su))_rgba(0,0,0,0.25)] flex flex-col gap-[calc(0.7*var(--su))] portrait:w-full portrait:p-[calc(4*var(--su))] portrait:rounded-[calc(2.5*var(--su))] portrait:gap-[calc(1.5*var(--su))]"
+          >
+            <div
+              class="card-header flex items-center gap-[calc(0.5*var(--su))] shrink-0 portrait:gap-[calc(1.5*var(--su))]"
+            >
               <svg
-                class="card-icon"
+                class="card-icon w-[calc(2*var(--su))] h-[calc(2*var(--su))] shrink-0 portrait:w-[calc(6*var(--su))] portrait:h-[calc(6*var(--su))]"
                 viewBox="0 0 58 58"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -109,15 +154,27 @@
                   fill="white"
                 />
               </svg>
-              <span class="card-label">Version</span>
+              <span
+                class="card-label text-[calc(0.65*var(--su))] font-bold tracking-[0.08em] uppercase text-white/80 leading-none portrait:text-[calc(2*var(--su))]"
+                >Version</span
+              >
             </div>
-            <div class="card-value" id="version">N/A</div>
+            <div
+              class="card-value text-[calc(1.2*var(--su))] font-semibold text-white leading-[1.15] overflow-hidden text-ellipsis line-clamp-2 tracking-[-0.02em] portrait:text-[calc(3.5*var(--su))]"
+              id="version"
+            >
+              N/A
+            </div>
           </div>
 
-          <div class="card">
-            <div class="card-header">
+          <div
+            class="card w-[calc(25*var(--su))] bg-[linear-gradient(106deg,rgba(255,255,255,0.12)_3%,rgba(255,255,255,0.04)_100%)] border border-[rgba(255,255,255,0.15)] rounded-[calc(1*var(--su))] p-[calc(1*var(--su))] backdrop-blur-[32px] shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset,0_-1px_0_0_rgba(255,255,255,0.05)_inset,0_calc(0.2*var(--su))_calc(1.5*var(--su))_rgba(0,0,0,0.25)] flex flex-col gap-[calc(0.7*var(--su))] portrait:w-full portrait:p-[calc(4*var(--su))] portrait:rounded-[calc(2.5*var(--su))] portrait:gap-[calc(1.5*var(--su))]"
+          >
+            <div
+              class="card-header flex items-center gap-[calc(0.5*var(--su))] shrink-0 portrait:gap-[calc(1.5*var(--su))]"
+            >
               <svg
-                class="card-icon"
+                class="card-icon w-[calc(2*var(--su))] h-[calc(2*var(--su))] shrink-0 portrait:w-[calc(6*var(--su))] portrait:h-[calc(6*var(--su))]"
                 viewBox="0 0 58 58"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,15 +194,27 @@
                   fill="white"
                 />
               </svg>
-              <span class="card-label">Coordinates</span>
+              <span
+                class="card-label text-[calc(0.65*var(--su))] font-bold tracking-[0.08em] uppercase text-white/80 leading-none portrait:text-[calc(2*var(--su))]"
+                >Coordinates</span
+              >
             </div>
-            <div class="card-value" id="coordinates">N/A</div>
+            <div
+              class="card-value text-[calc(1.2*var(--su))] font-semibold text-white leading-[1.15] overflow-hidden text-ellipsis line-clamp-2 tracking-[-0.02em] portrait:text-[calc(3.5*var(--su))]"
+              id="coordinates"
+            >
+              N/A
+            </div>
           </div>
 
-          <div class="card">
-            <div class="card-header">
+          <div
+            class="card w-[calc(25*var(--su))] bg-[linear-gradient(106deg,rgba(255,255,255,0.12)_3%,rgba(255,255,255,0.04)_100%)] border border-[rgba(255,255,255,0.15)] rounded-[calc(1*var(--su))] p-[calc(1*var(--su))] backdrop-blur-[32px] shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset,0_-1px_0_0_rgba(255,255,255,0.05)_inset,0_calc(0.2*var(--su))_calc(1.5*var(--su))_rgba(0,0,0,0.25)] flex flex-col gap-[calc(0.7*var(--su))] portrait:w-full portrait:p-[calc(4*var(--su))] portrait:rounded-[calc(2.5*var(--su))] portrait:gap-[calc(1.5*var(--su))]"
+          >
+            <div
+              class="card-header flex items-center gap-[calc(0.5*var(--su))] shrink-0 portrait:gap-[calc(1.5*var(--su))]"
+            >
               <svg
-                class="card-icon"
+                class="card-icon w-[calc(2*var(--su))] h-[calc(2*var(--su))] shrink-0 portrait:w-[calc(6*var(--su))] portrait:h-[calc(6*var(--su))]"
                 viewBox="0 0 58 58"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -161,9 +230,15 @@
                   fill="white"
                 />
               </svg>
-              <span class="card-label">Labels</span>
+              <span
+                class="card-label text-[calc(0.65*var(--su))] font-bold tracking-[0.08em] uppercase text-white/80 leading-none portrait:text-[calc(2*var(--su))]"
+                >Labels</span
+              >
             </div>
-            <div class="label-chips" id="labels"></div>
+            <div
+              class="label-chips flex flex-wrap gap-[calc(0.4*var(--su))] overflow-hidden content-start portrait:gap-[calc(1*var(--su))]"
+              id="labels"
+            ></div>
           </div>
         </div>
       </div>
