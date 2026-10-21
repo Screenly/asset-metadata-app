@@ -1,4 +1,8 @@
+[![Version](https://img.shields.io/github/v/release/Screenly/asset-metadata-app)](https://github.com/Screenly/asset-metadata-app/releases/latest)
+
 # Asset Metadata
+
+![Asset Metadata Preview](/screenshots/1920x1080.webp)
 
 Displays screen metadata on Screenly digital signage players, including hostname, screen name, hardware type, firmware version, GPS coordinates, and assigned labels.
 
