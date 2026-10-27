@@ -9,12 +9,6 @@ updates:
       bun:
         patterns:
           - '*'
-    ignore:
-      # typescript-eslint (used by @screenly/edge-apps lint) supports TypeScript <6.1;
-      # TypeScript 7 breaks `bun run lint`. Remove once upstream supports it.
-      - dependency-name: 'typescript'
-        versions:
-          - '>=7'
 
     # typescript-eslint does not support TypeScript 7 yet: its peer range is
     # ">=4.8.4 <6.1.0" as of typescript-eslint 8.71.1, and TypeScript 7 removed
