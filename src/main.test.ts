@@ -154,4 +154,33 @@ describe('Asset Metadata live info', () => {
       /^\d+ × \d+ · (Landscape|Portrait)$/,
     )
   })
+
+  test('updates display on resize, including orientation', async () => {
+    const setViewport = (width: number, height: number) => {
+      Object.defineProperty(window, 'innerWidth', {
+        configurable: true,
+        value: width,
+      })
+      Object.defineProperty(window, 'innerHeight', {
+        configurable: true,
+        value: height,
+      })
+    }
+    Object.defineProperty(window, 'devicePixelRatio', {
+      configurable: true,
+      value: 1,
+    })
+
+    setViewport(1920, 1080)
+    await init()
+    expect(document.querySelector('#display')?.textContent).toBe(
+      '1920 × 1080 · Landscape',
+    )
+
+    setViewport(1080, 1920)
+    window.dispatchEvent(new window.Event('resize'))
+    expect(document.querySelector('#display')?.textContent).toBe(
+      '1080 × 1920 · Portrait',
+    )
+  })
 })
