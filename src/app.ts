@@ -45,9 +45,7 @@ function renderLabels(tags: string[] | undefined): void {
   }
 }
 
-export default async function init(): Promise<void> {
-  setupErrorHandling()
-
+async function render(): Promise<void> {
   const { logoUrl } = await setupBranding()
   renderLogo(logoUrl)
 
@@ -61,6 +59,16 @@ export default async function init(): Promise<void> {
   renderDisplay()
   window.addEventListener('resize', renderDisplay)
   await startClock()
+}
 
-  signalReady()
+export default async function init(): Promise<void> {
+  setupErrorHandling()
+
+  try {
+    await render()
+  } finally {
+    // Always tell the player we're ready, even if part of rendering failed,
+    // so the screen never hangs waiting for the ready timeout.
+    signalReady()
+  }
 }

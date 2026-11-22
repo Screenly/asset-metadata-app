@@ -1,4 +1,4 @@
-import { describe, test, expect, beforeEach, afterEach } from 'bun:test'
+import { describe, test, expect, beforeEach, afterEach, mock } from 'bun:test'
 import { setupScreenlyMock, resetScreenlyMock } from '@screenly/edge-apps/test'
 
 import init from './app'
@@ -182,5 +182,35 @@ describe('Asset Metadata live info', () => {
     expect(document.querySelector('#display')?.textContent).toBe(
       '1080 × 1920 · Portrait',
     )
+  })
+})
+
+describe('Asset Metadata ready signal', () => {
+  beforeEach(setup)
+
+  afterEach(() => {
+    stopClock()
+    resetScreenlyMock()
+    document.body.innerHTML = ''
+  })
+
+  test('signals ready once after rendering', async () => {
+    const ready = mock(() => {})
+    screenly.signalReadyForRendering = ready
+    await init()
+    expect(ready).toHaveBeenCalledTimes(1)
+    expect(document.querySelector('#hostname')?.textContent).toBe('srly-abc123')
+  })
+
+  test('signals ready even when rendering throws', async () => {
+    const ready = mock(() => {})
+    screenly.signalReadyForRendering = ready
+    Object.defineProperty(screenly.metadata, 'hostname', {
+      get() {
+        throw new Error('metadata unavailable')
+      },
+    })
+    await expect(init()).rejects.toThrow('metadata unavailable')
+    expect(ready).toHaveBeenCalledTimes(1)
   })
 })
