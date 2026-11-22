@@ -1,7 +1,12 @@
 @import '@screenly/edge-apps/styles';
 
 :root {
-  --card-border: rgba(255, 255, 255, 0.15);
+  --accent: var(--theme-color-primary, #972eff);
+  --text: #fff;
+  --text-muted: rgba(255, 255, 255, 0.85);
+  --text-faint: rgba(255, 255, 255, 0.72);
+  --hairline: rgba(255, 255, 255, 0.14);
+  --panel-bg: rgba(14, 16, 24, 0.55);
 }
 
 *,
@@ -20,18 +25,28 @@ body {
 }
 
 body {
-  background: url('/static/images/bg.webp') no-repeat center center;
+  background: #0b0d14 url('/static/images/bg.webp') no-repeat center center;
   background-size: cover;
   font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text);
 }
 
+/* Darken the photo where the text sits: strongest bottom-left, light top-right. */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: var(--z-index-backdrop);
   pointer-events: none;
-  background: rgba(0, 0, 0, 0.15);
+  background:
+    linear-gradient(
+      to top,
+      rgba(8, 10, 16, 0.92) 0%,
+      rgba(8, 10, 16, 0.6) 38%,
+      rgba(8, 10, 16, 0.15) 75%,
+      rgba(8, 10, 16, 0.3) 100%
+    ),
+    linear-gradient(to right, rgba(8, 10, 16, 0.45) 0%, rgba(8, 10, 16, 0) 60%);
 }
 
 auto-scaler {
@@ -46,141 +61,326 @@ auto-scaler {
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding: calc(3.5 * var(--su)) calc(4 * var(--su));
 }
 
-.widgets {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: calc(1.5 * var(--su));
-  gap: calc(0.75 * var(--su));
-  overflow: hidden;
-}
+/* ---------- Top bar ---------- */
 
-.card {
-  width: calc(25 * var(--su));
-  background: linear-gradient(
-    106deg,
-    rgba(255, 255, 255, 0.12) 3%,
-    rgba(255, 255, 255, 0.04) 100%
-  );
-  border: 1px solid var(--card-border);
-  border-radius: calc(1 * var(--su));
-  padding: calc(1 * var(--su));
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.15) inset,
-    0 -1px 0 0 rgba(255, 255, 255, 0.05) inset,
-    0 calc(0.2 * var(--su)) calc(1.5 * var(--su)) rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  gap: calc(0.7 * var(--su));
-}
-
-.card-header {
+.topbar {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: calc(0.5 * var(--su));
-  flex-shrink: 0;
+  height: calc(2.8 * var(--su));
 }
 
-.card-icon {
-  width: calc(2 * var(--su));
-  height: calc(2 * var(--su));
-  flex-shrink: 0;
+.brand-logo {
+  height: 100%;
+  max-width: calc(14 * var(--su));
+  object-fit: contain;
+  object-position: left center;
 }
 
-.card-label {
-  font-size: calc(0.65 * var(--su));
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1;
+/* ---------- Layout ---------- */
+
+.layout {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) calc(37 * var(--su));
+  align-items: end;
+  gap: calc(4 * var(--su));
 }
 
-.card-value {
-  font-size: calc(1.2 * var(--su));
+/* ---------- Hero ---------- */
+
+.hero {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(1.2 * var(--su));
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: calc(0.6 * var(--su));
+  font-size: calc(1.15 * var(--su));
   font-weight: 600;
-  color: #fff;
-  line-height: 1.15;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.status-dot {
+  width: calc(0.8 * var(--su));
+  height: calc(0.8 * var(--su));
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 calc(0.25 * var(--su))
+    color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.screen-name {
+  margin: 0;
+  font-size: calc(6.2 * var(--su));
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
   overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  letter-spacing: -0.02em;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
 }
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: calc(0.5 * var(--su));
+  font-size: calc(2 * var(--su));
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 0;
+}
+
+.location[hidden] {
+  display: none;
+}
+
+.location span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.location .icon {
+  width: calc(2 * var(--su));
+  height: calc(2 * var(--su));
+}
+
+/* ---------- Labels ---------- */
 
 .label-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: calc(0.4 * var(--su));
+  gap: calc(0.5 * var(--su));
+  margin-top: calc(0.6 * var(--su));
+  max-height: calc(6.4 * var(--su));
   overflow: hidden;
-  align-content: flex-start;
 }
 
 .label-chip {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: calc(0.35 * var(--su));
-  padding: calc(0.15 * var(--su)) calc(0.45 * var(--su));
-  font-size: calc(0.6 * var(--su));
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(0.4 * var(--su));
+  padding: calc(0.45 * var(--su)) calc(1 * var(--su));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--hairline);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: calc(1.3 * var(--su));
+  font-weight: 600;
+  line-height: 1.2;
   white-space: nowrap;
-  line-height: 1.4;
+  color: var(--text);
+}
+
+.label-chip::before {
+  content: '#';
+  color: var(--text-faint);
 }
 
 .no-labels {
-  font-size: calc(0.75 * var(--su));
-  color: rgba(255, 255, 255, 0.8);
-  font-style: italic;
+  font-size: calc(1.3 * var(--su));
+  color: var(--text-faint);
 }
 
+/* ---------- Spec panel ---------- */
+
+.specs {
+  display: flex;
+  flex-direction: column;
+  padding: calc(0.6 * var(--su)) calc(1.8 * var(--su));
+  border-radius: calc(1.2 * var(--su));
+  background: var(--panel-bg);
+  border: 1px solid var(--hairline);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 calc(0.6 * var(--su)) calc(2.4 * var(--su)) rgba(0, 0, 0, 0.35);
+}
+
+.spec {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: calc(1 * var(--su));
+  row-gap: calc(0.25 * var(--su));
+  align-items: center;
+  padding: calc(0.75 * var(--su)) 0;
+}
+
+.spec + .spec {
+  border-top: 1px solid var(--hairline);
+}
+
+.spec .icon {
+  grid-row: 1 / span 2;
+  width: calc(3 * var(--su));
+  height: calc(3 * var(--su));
+  padding: calc(0.6 * var(--su));
+  border-radius: calc(0.6 * var(--su));
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: #fff;
+}
+
+.spec-label {
+  font-size: calc(1 * var(--su));
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  line-height: 1;
+}
+
+.spec-value {
+  font-size: calc(1.85 * var(--su));
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#coordinates,
+#local-time,
+#display {
+  font-variant-numeric: tabular-nums;
+}
+
+.spec-meta {
+  margin-left: 0.4em;
+  font-size: 0.8em;
+  color: var(--text-faint);
+}
+
+/* ---------- Icons ---------- */
+
+.icon {
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Portrait ---------- */
+
 @media (orientation: portrait) {
-  .widgets {
-    align-items: stretch;
-    gap: calc(2.5 * var(--su));
+  body::before {
+    background: linear-gradient(
+      to top,
+      rgba(8, 10, 16, 0.95) 0%,
+      rgba(8, 10, 16, 0.88) 45%,
+      rgba(8, 10, 16, 0.6) 58%,
+      rgba(8, 10, 16, 0.12) 80%,
+      rgba(8, 10, 16, 0.3) 100%
+    );
   }
 
-  .card {
-    width: 100%;
-    padding: calc(4 * var(--su));
-    border-radius: calc(2.5 * var(--su));
-    gap: calc(1.5 * var(--su));
+  #app {
+    padding: calc(7 * var(--su)) calc(6 * var(--su));
   }
 
-  .card-header {
-    gap: calc(1.5 * var(--su));
+  .topbar {
+    height: calc(5 * var(--su));
   }
 
-  .card-icon {
-    width: calc(6 * var(--su));
-    height: calc(6 * var(--su));
+  .brand-logo {
+    max-width: calc(30 * var(--su));
   }
 
-  .card-label {
-    font-size: calc(2 * var(--su));
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: end;
+    gap: calc(6 * var(--su));
   }
 
-  .card-value {
-    font-size: calc(3.5 * var(--su));
+  .hero {
+    gap: calc(2.2 * var(--su));
+  }
+
+  .eyebrow {
+    font-size: calc(2.2 * var(--su));
+    gap: calc(1.2 * var(--su));
+  }
+
+  .status-dot {
+    width: calc(1.5 * var(--su));
+    height: calc(1.5 * var(--su));
+    box-shadow: 0 0 0 calc(0.5 * var(--su))
+      color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .screen-name {
+    font-size: calc(11 * var(--su));
+    -webkit-line-clamp: 3;
+  }
+
+  .location {
+    font-size: calc(3.6 * var(--su));
+    gap: calc(1 * var(--su));
+  }
+
+  .location .icon {
+    width: calc(3.6 * var(--su));
+    height: calc(3.6 * var(--su));
   }
 
   .label-chips {
     gap: calc(1 * var(--su));
+    margin-top: calc(1 * var(--su));
+    max-height: calc(12 * var(--su));
   }
 
   .label-chip {
+    font-size: calc(2.5 * var(--su));
+    padding: calc(0.9 * var(--su)) calc(1.8 * var(--su));
+    gap: calc(0.6 * var(--su));
+  }
+
+  .no-labels {
+    font-size: calc(2.5 * var(--su));
+  }
+
+  .specs {
+    padding: calc(1 * var(--su)) calc(3.2 * var(--su));
+    border-radius: calc(2.4 * var(--su));
+  }
+
+  .spec {
+    column-gap: calc(2 * var(--su));
+    row-gap: calc(0.5 * var(--su));
+    padding: calc(1.6 * var(--su)) 0;
+  }
+
+  .spec .icon {
+    width: calc(6 * var(--su));
+    height: calc(6 * var(--su));
+    padding: calc(1.2 * var(--su));
+    border-radius: calc(1.2 * var(--su));
+  }
+
+  .spec-label {
     font-size: calc(2 * var(--su));
-    padding: calc(0.75 * var(--su)) calc(1.5 * var(--su));
-    border-radius: calc(1 * var(--su));
+  }
+
+  .spec-value {
+    font-size: calc(3.5 * var(--su));
   }
 }

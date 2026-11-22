@@ -10,6 +10,10 @@ import path from 'path'
 
 const { screenlyJsContent } = createMockScreenlyForScreenshots(
   {
+    screen_name: 'Lobby Display',
+    hostname: 'srly-7f3a9c2e',
+    hardware: 'Screenly Player Max',
+    screenly_version: 'v2.4.1',
     coordinates: [40.7128, -74.006],
     location: 'New York, NY',
     tags: ['lobby', 'floor-2', 'new-york', 'retail', 'north-wing', 'entrance', 'demo'],
